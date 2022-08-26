@@ -44,7 +44,7 @@ public class AlunoController {
         AlunoModel authenticated = alunoService.authenticate(alunoModel.getEmail(), alunoModel.getSenha());
         if(authenticated != null){
             model.addAttribute("alunoLogin", authenticated.getEmail());
-            return "personal_page";
+            return "home";
         }else {
             return "error_page";
         }
