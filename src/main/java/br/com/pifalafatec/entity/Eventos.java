@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Date;
-import java.sql.Time;
 
 @Entity
 @Data
@@ -21,10 +19,11 @@ public class Eventos {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nome;
-    private Date data;
-    private Time hora;
+    private String data;
+    private String hora;
     private String palestrante;
     private String descricao;
+
 
 
 

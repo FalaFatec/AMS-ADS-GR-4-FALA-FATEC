@@ -5,10 +5,14 @@ import br.com.pifalafatec.repository.EventosRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @AllArgsConstructor
 public class EventosController {
@@ -20,15 +24,15 @@ public class EventosController {
         return repository.findAll();
     }
 
-    @GetMapping("/evento/{id}")
-    public Eventos getEventoById(@PathVariable Long id){
-        return repository.findById(id).get();
+    @GetMapping("/evento/nome")
+    public ResponseEntity<List<Eventos>> getEventoByNome(@RequestParam String nome){
+        return new ResponseEntity<List<Eventos>>(repository.findByNome(nome), HttpStatus.OK);
     }
 
 
     @PostMapping("/evento")
-    public Eventos saveEvento(@RequestBody Eventos eventos) {
-        return repository.save(eventos);
+    public ResponseEntity<Eventos> saveEvento(@RequestBody Eventos eventos) {
+        return ResponseEntity.ok(repository.save(eventos));
     }
 
     @PutMapping("/evento/{id}")
@@ -43,9 +47,12 @@ public class EventosController {
         return repository.save(evento);
     }
 
-    @DeleteMapping("/evento/{id}")
-    public void deleteEvento(@PathVariable Long id){
-        repository.deleteById(id);
+    @Transactional
+    @DeleteMapping("/evento/data")
+    public void deleteEvento(@RequestParam String data){
+        //repository.deleteById(id);
+        repository.deleteByData(data);
     }
+
 
 }
