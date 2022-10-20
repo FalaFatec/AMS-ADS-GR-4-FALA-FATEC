@@ -2,6 +2,7 @@ package br.com.pifalafatec.controller;
 
 import br.com.pifalafatec.dto.LoginDto;
 import br.com.pifalafatec.dto.SignUpDto;
+import br.com.pifalafatec.entity.Eventos;
 import br.com.pifalafatec.entity.Role;
 import br.com.pifalafatec.entity.User;
 import br.com.pifalafatec.repository.RoleRepository;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
 
 @CrossOrigin("*")
 @RestController
@@ -34,6 +36,11 @@ public class AuthController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @GetMapping("/signin")
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
