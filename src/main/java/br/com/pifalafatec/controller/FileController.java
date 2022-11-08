@@ -3,10 +3,7 @@ package br.com.pifalafatec.controller;
 import br.com.pifalafatec.SaveFileResult;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -33,6 +30,7 @@ public class FileController {
 
     }
 
+    @PostMapping
     public List<SaveFileResult> upload(@RequestPart List<MultipartFile> files){
          return files.stream()
                  .map(this::saveFile)
