@@ -13,15 +13,13 @@ import javax.persistence.Id;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Eventos {
+public class Achados {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nome;
+    private String local;
     private String data;
-    private String hora;
-    private String palestrante;
     private String descricao;
-
 }
